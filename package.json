@@ -1,0 +1,13 @@
+{
+  "name": "instant-docx-resume",
+  "version": "1.0.0",
+  "description": "Microservice that converts JSON Resume to DOCX",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "docx": "^8.5.0",
+    "express": "^4.21.0"
+  }
+}
