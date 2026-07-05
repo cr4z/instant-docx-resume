@@ -222,13 +222,16 @@ async function buildDocx(json) {
       );
 
       const dates = dateRange(e.startDate, e.endDate);
-      if (dates) {
+      const dateParts = [dates];
+      if (e.gpa) dateParts.push(`GPA: ${e.gpa}`);
+      const dateText = dateParts.filter(Boolean).join('  |  ');
+      if (dateText) {
         children.push(
           new Paragraph({
             spacing: { after: 80 },
             children: [
               new TextRun({
-                text: dates,
+                text: dateText,
                 size: 20,
                 font: 'Calibri',
                 italics: true,
