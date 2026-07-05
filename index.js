@@ -8,6 +8,13 @@ const {
 
 const app = express();
 app.use(express.json({ limit: '10mb' }));
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.sendStatus(204);
+  next();
+});
 
 const PORT = process.env.PORT || 3000;
 
@@ -376,6 +383,10 @@ app.post('/resume', async (req, res) => {
 
 app.get('/', (req, res) => {
   res.json({ service: 'instant-docx-resume', status: 'ok', usage: 'POST /resume with JSON Resume body' });
+});
+
+app.get('/health', (req, res) => {
+  res.json({ service: 'instant-docx-resume', status: 'ok' });
 });
 
 // ── Start ─────────────────────────────────────────────────────────────
